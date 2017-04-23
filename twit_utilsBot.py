@@ -26,5 +26,7 @@ class twit_utilsBot(object):
         return tweets_words
 
 
-if __name__ == '__main__':
-    print(twit_utilsBot().count_word(["a","aaa","b","b"]))
+    def listener(self, tweet):
+        if "palabra_mas_usada" in tweet.text:
+            a = count_word(take_tweets_words(tweet.user))
+            print(("la palabra más usada ha sido ",{1},", usada "{2}," veces").format(a[0],a[1]))
