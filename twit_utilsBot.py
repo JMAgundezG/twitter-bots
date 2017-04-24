@@ -32,9 +32,13 @@ class twit_utilsBot(object):
 
     def listener(self, tweet):
         if "#cuentame" in tweet['text']:#si se está utilizando el hastag cuentame
+
             #obtenemos una tupla con la palbra mas usada y el número de veces de esta
             words = self.count_word(self.take_tweets_words(tweet['user']['screen_name']))
-            s = str(tweet['user']['screen_name']+" tu palabra mas usada: "+ words[0]+"\nexactamente "+ str(words[1])+" veces")
+            #creamos el string del tweet aunque sea un poco lioso
+
+            s = str('@'+tweet['user']['screen_name']+" tu palabra mas usada: "+ words[0]+"\nexactamente "+ str(words[1])+" veces")
+            #twiteamos
             self.bot.update_status(s)
             print("Tu palabra mas usada ", words)
 
