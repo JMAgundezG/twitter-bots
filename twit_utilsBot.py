@@ -17,6 +17,9 @@ class twit_utilsBot(object):
                 aux[i] = 1
 
         a = sorted(aux.items(),key=lambda x:x[1],reverse=True)
+        for w in a :
+            if len(w[0]) >4 and w[0] != 'RT':
+                return w
         return a[0]
 
 
