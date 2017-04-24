@@ -26,7 +26,7 @@ filename.close()
 if __name__ == '__main__':
     thread = stream.StreamThread(api,auth)
     thread.start()
-    print("que pasa aqui")
+
 
 
 

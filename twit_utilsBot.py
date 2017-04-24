@@ -1,8 +1,11 @@
 import time
+import tweepy
+import logging
 
 class twit_utilsBot(object):
-    def __init__(self):
-        self.bot = Account()
+    def __init__(self,api,screen_name):
+        self.bot = api
+        self.screen_name = screen_name
 
     @staticmethod
     def count_word(list_of_words):
@@ -17,20 +20,22 @@ class twit_utilsBot(object):
         return a[0]
 
 
-    def take_tweets_words(self,user):
-        tweets = self.bot.user_timeline(user, count=1000)
+    def take_tweets_words(self,screen_name):
+
+
         tweets_words = []
-        for i in tweets:
+        for i in tweepy.Cursor(self.bot.user_timeline,screen_name=screen_name).items(400):#devuelve los 200 ultimos tweets
             for j in i.text.split(" "):
                 tweets_words.append(j)
         return tweets_words
 
 
     def listener(self, tweet):
-        if "palabra_mas_usada" in tweet.text:
-            a = count_word(take_tweets_words(tweet.user))
-<<<<<<< HEAD
-print(("la palabra más usada ha sido ",{1},", usada "{2}," veces").format(a[0],a[1]))
-=======
-            print(("la palabra más usada ha sido ",{1},", usada "{2}," veces").format(a[0],a[1]))
->>>>>>> 6f1e43597710d828a72a6d3f122ecbf26aee8a1d
+        if "#cuentame" in tweet['text']:#si se está utilizando el hastag cuentame
+            #obtenemos una tupla con la palbra mas usada y el número de veces de esta
+            words = self.count_word(self.take_tweets_words(tweet['user']['screen_name']))
+            s = str(tweet['user']['screen_name']+" tu palabra mas usada: "+ words[0]+"\nexactamente "+ str(words[1])+" veces")
+            self.bot.update_status(s)
+            print("Tu palabra mas usada ", words)
+
+
