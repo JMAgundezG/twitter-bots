@@ -45,4 +45,4 @@ class StreamThread (threading.Thread):
         self.stream = Stream(auth, self.listener)
 
     def run(self):
-        self.stream.filter(track=['@JosemaBot'])#todo cambiar cuando se cambie la cuenta
+        self.stream.filter(track=['@RotuladorBot'])#todo cambiar cuando se cambie la cuenta
