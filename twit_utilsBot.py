@@ -69,7 +69,12 @@ class twit_utilsBot(object):
             self.bot.update_status(s)
             print('@' + tweet['user']['screen_name'] + " mayor mención: " + word[0] + "\ntotal " + str(
                 word[1]) + " veces")
+        elif tieneInsulto(tweet['text']):
+            s = '@{} oye un respeto tú >:@'.format(tweet['user']['screen_name'])
+            self.bot.update_status(s)
 
-
-
-
+def tieneInsulto(s):
+    with open('insultos.txt', 'r') as f:
+        ins = f.read().split('\n')
+        sl = s.lower()
+        return any(map(lambda x: x.lower() in sl, ins)):
