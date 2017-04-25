@@ -69,7 +69,6 @@ class twit_utilsBot(object):
             self.bot.update_status(s)
             print('@' + tweet['user']['screen_name'] + " mayor mención: " + word[0] + "\ntotal " + str(
                 word[1]) + " veces")
-
-
-
-
+        elif "imbécil" in tweet['text'] or "gilipollas" in tweet['text']:
+            s = '@{} tu puta madre hijo de puta >:@'.format(tweet['user']['screen_name'])
+            self.bot.update_status(s)
